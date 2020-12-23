@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>divide money game</title>
+    <style>
+        #user{
+            background:linear-gradient(rgba( 116, 220, 59 ),rgba( 120, 215, 241, 0.197 ));
+            width: window.innerWidth;
+            height: 700px;
+        }
+        #amount
+        {
+            background: white url(search.png) no-repeat right center;
+            color:rgba( 124, 102, 13 );
+        }
+        #balance
+        {
+            background:linear-gradient(rgba( 116, 220, 59 ),rgba( 120, 215, 241 ));
+            width:400px;
+            height:200px;
+        }
+        #error{
+        color: #d36363;
+        
+      }
+    </style>
+    </head>
+<body>
+<div id="user">
+    <p style="font-weight:bold">COUNTER</p>
+    <p id="counter">0</p>
+    <button onclick="clearInterval(myCounter)">STOP COUNTING</button>
+    <button onclick="clearTimeout(delayedWelcomeMessag)">AVOID COOKIE REQUESTS(TIME:5 sec)</button>
+    <p style= "font-size:30px; font-weight:bold">Enter the amount</p>
+    <input type="text" id="amount">
+    <button type="button" style="border-radius:20px ;color:rgba( 210, 179, 100 )" id="start" onclick="start();">START
+    </button>
+    <p id="error"></p>
+    </div>  
+    
+        
+    <script>
+        var counter=document.getElementById("counter");
+        var x=0;
+        var myCounter=setInterval(function(){x++;counter.innerHTML=x},1000);
+        
+        var delayedWelcomeMessag=setTimeout(function(){
+            
+        var cookies=window.confirm("DO YOU ACCEPT COOKIES?");
+        if(cookies == true)
+            {
+                window.alert("you have accepted cookies")
+            }
+        else{
+           window.alert("you denied accepting cookies");
+        }
+       var v= prompt("what is your name?");
+        window.alert("welcome to this fun game "+ v +" it is nice to meet you");
+       },5000);
+        
+        
+       function start(){
+           var a =document.getElementById("amount").value;
+           var errorMessage=document.getElementById("error");
+           var errorToThrow="";
+           try{
+               if(/\d/g.test(a)== false)
+                   errorToThrow+="wrong! Please enter only digits";
+               throw errorToThrow;
+           }
+           catch(err)
+               {
+                   errorMessage.innerHTML=err;
+               }
+                                            
+            
+        document.getElementById("user").innerHTML+="<br />"+"<p >CURRENT BALANCE RS:"+ a;
+            
+        
+        
+        var b = a;
+            
+        var item = 0;
+        while(b>0){
+            var price=Math.floor(Math.random()*100);
+            
+                if(price<=b)
+                    {
+                        item+=1;
+                        b-= price;
+                       
+                        document.getElementById("user").innerHTML += "<p> Purchase amount Rs "+ price +"current balance:"+ b +  "</p>" 
+                        
+                    } 
+            }document.getElementById("user").innerHTML+="<p> YOU BOUGHT "+             item +"items. <p>";
+       }
+    </script>
+</body>
+
+
+</html>
